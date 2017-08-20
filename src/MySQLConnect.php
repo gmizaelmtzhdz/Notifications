@@ -25,9 +25,9 @@ class MySQLConnect
   */
   public function __construct()
   {
-    $this->host="127.0.0.1";
-    $this->user="root";
-    $this->password="acer1";
+    $this->host="";
+    $this->user="";
+    $this->password="";
     $this->db="notification";
   }
   /**
@@ -74,7 +74,7 @@ class MySQLConnect
   * @param string $order
   * @return mixed
   */
-  public function read($query=null,$table,$order_by=null,$order='ASC')
+  public function read($query=null,$table,$order_by=null,$order='ASC',$limit=array())
   {
     $result=array();
 
@@ -83,16 +83,46 @@ class MySQLConnect
       $str_order="";
       if($order_by!=null)
         $str_order="ORDER BY $order_by $order";
-      $result=$this->connection->query("SELECT * FROM $table $str_order");
-      #$result=$result->fetch_assoc()
-      #$result=mysqli_fetch_all($result);
+      $read="SELECT * FROM $table $str_order";
+      if(!empty($limit))
+      {
+        $read=$read." LIMIT ".$limit["down"].",".$limit["up"];
+      }
+      $result=$this->connection->query($read);
+      $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
     }
     else
     {
       $result=$this->connection->query($query);
+      $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
     }
     return $result;
   }
+  /**
+  * Update data from database
+  * @version 1.0
+  * @param string $table
+  * @param array $data
+  * @param array $where
+  * @return mixed
+  */
+  public function update($table,$data,$where)
+  {
+    $update="UPDATE $table SET ";
+    foreach($data as $key=>$value)
+    {
+      $update=$update.$key.'='.$value.',';
+    }
+    $update=rtrim($update,",");
+    $update=$update." WHERE ";
+    foreach($where as $key=>$value)
+    {
+      $update=$update.$key.'='.$value." AND";
+    }
+    $update=rtrim($update,"AND");
+    return $this->connection->query($update);
+  }
+
   /**
   * close connection
   * @version 1.0
