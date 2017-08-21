@@ -26,6 +26,6 @@ Mini Project about Notifications: MySQL, PHP, JS
 |longtext|message|
 |varchar|url|
 |enum('Y','N')|readed|
-|integer|cliente_id|
+|integer|user_id|
 
 *Note: This Project is still under development.*
