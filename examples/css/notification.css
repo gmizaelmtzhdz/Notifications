@@ -1,0 +1,12 @@
+div{margin:0px!important;}
+
+#container_notification_items{border-left:solid .5px;border-right:solid .5px;border-top:solid .5px;}
+#view_more{text-align: center;cursor: pointer;font-weight: lighter;}
+#view_more .arrow-down{width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 20px solid #212121; margin:0 auto!important;}
+
+.notification{border-bottom:solid .5px;display: flex; width:100%;position:relative; cursor: pointer;color:black;}
+.notification .notification_url{text-decoration: none;margin:15px;}
+.notification .notification_content_icon{margin:15px!important;}
+.notification .notification_content_icon .notification_icon{width:30px;height: 30px;display:inline-block; background-color: #2196f3;border-radius: 30px;}
+.notification .notification_title{ display:block;margin-left: 10px;margin-right: 10px; text-transform: uppercase; font-size: 1.2rem; color:black;}
+.notification .notification_message{display: inline-block;font-size: .9rem; font-weight: lighter;color:black;}
